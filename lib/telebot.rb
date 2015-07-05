@@ -10,6 +10,7 @@ require_relative "telebot/objects/location"
 require_relative "telebot/objects/document"
 require_relative "telebot/objects/sticker"
 require_relative "telebot/objects/video"
+require_relative "telebot/objects/message"
 
 require_relative "telebot/version"
 require_relative "telebot/client"
@@ -29,9 +30,9 @@ end
 # * Document
 # * Sticker
 # * Video
-#
-# TODO:
 # * Message
+
+# TODO:
 # * Update
 # * InputFile
 # * UserProfilePhotos

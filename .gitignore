@@ -7,3 +7,6 @@
 /pkg/
 /spec/reports/
 /tmp/
+
+# To use benefits of vim-rails plugin
+/config/environment.rb

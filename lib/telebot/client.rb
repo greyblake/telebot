@@ -128,6 +128,18 @@ module Telebot
       Message.new(result)
     end
 
+    # Send general file.
+    #
+    # @param chat_id [Integer]
+    # @param document [Telebot::InputFile, String] document to send (file or file_id)
+    # @param reply_to_message_id [Integer] If the message is a reply, ID of the original message
+    # @param reply_markup [ReplyKeyboardMarkup, ReplyKeyboardHide, ForceReply] Additional interface options
+    #
+    # @return [Telebot::Message]
+    def send_document(chat_id:, document:, reply_to_message_id: nil, reply_markup: nil)
+      result = call(:sendDocument, chat_id: chat_id, document: document, reply_to_message_id: reply_to_message_id, reply_markup: reply_markup)
+      Message.new(result)
+    end
 
 
     private def call(method_name, params = {})

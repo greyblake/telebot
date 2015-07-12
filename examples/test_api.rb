@@ -26,6 +26,12 @@ bot.run do |client, message|
     client.send_message(chat_id: message.chat.id, text: "Let me say 'Hi' in Esperanto.")
     file = Telebot::InputFile.new(fixture("saluton_amiko.ogg"))
     client.send_audio(chat_id: message.chat.id, audio: file)
+  when /send_document/
+    file = Telebot::InputFile.new(__FILE__)
+    client.send_document(chat_id: message.chat.id, document: file)
+  when /send_sticker/
+    file = Telebot::InputFile.new(fixture("zamenhof_sticker.webp"))
+    client.send_sticker(chat_id: message.chat.id, sticker: file)
   else
     client.send_message(chat_id: message.chat.id, text: "Unknown command")
   end

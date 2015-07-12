@@ -5,10 +5,10 @@
 # * sendPhoto
 # * forwardMessage
 # * sendAudio
-#
-# REMAINING:
 # * sendDocument
 # * sendSticker
+#
+# REMAINING:
 # * sendVideo
 # * sendLocation
 # * sendChatAction
@@ -138,6 +138,19 @@ module Telebot
     # @return [Telebot::Message]
     def send_document(chat_id:, document:, reply_to_message_id: nil, reply_markup: nil)
       result = call(:sendDocument, chat_id: chat_id, document: document, reply_to_message_id: reply_to_message_id, reply_markup: reply_markup)
+      Message.new(result)
+    end
+
+    # Use this method to send .webp stickers.
+    #
+    # @param chat_id [Integer]
+    # @param sticker [Telebot::InputFile, String] sticker to send (file or file_id)
+    # @param reply_to_message_id [Integer] If the message is a reply, ID of the original message
+    # @param reply_markup [ReplyKeyboardMarkup, ReplyKeyboardHide, ForceReply] Additional interface options
+    #
+    # @return [Telebot::Message]
+    def send_sticker(chat_id:, sticker:, reply_to_message_id: nil, reply_markup: nil)
+      result = call(:sendSticker, chat_id: chat_id, sticker: sticker, reply_to_message_id: reply_to_message_id, reply_markup: reply_markup)
       Message.new(result)
     end
 

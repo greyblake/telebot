@@ -8,16 +8,19 @@
 # * sendDocument
 # * sendSticker
 # * sendLocation
-#
-# REMAINING:
 # * sendVideo
 # * sendChatAction
+#
+# REMAINING:
 # * getUserProfilePhotos
 # * setWebhook
 
 module Telebot
   class Client
     API_URL = "https://api.telegram.org".freeze
+
+    # Available chat actions
+    CHAT_ACTIONS = [:typing, :upload_photo, :record_video, :upload_video, :record_audio, :upload_audio, :upload_document, :find_location].freeze
 
     def initialize(token, adapter: :net_http)
       fail(ArgumentError, "token can't be empty") if token.nil? || token.empty?
@@ -184,6 +187,19 @@ module Telebot
                                    reply_to_message_id: reply_to_message_id,
                                    reply_markup: reply_markup)
       Message.new(result)
+    end
+
+    # Use this method when you need to tell the user that something is happening on the bot's side.
+    # The status is set for 5 seconds or less (when a message arrives from your bot,
+    # Telegram clients clear its typing status).
+    #
+    # @param chat_id [Integer]
+    # @param action [Symbol] :typing, :upload_photo, etc. See {CHAT_ACTIONS}.
+    #
+    # @return [void]
+    def send_chat_action(chat_id:, action:)
+      fail(ArgumentError, "Unknown chat action `#{action.inspect}`") unless CHAT_ACTIONS.include?(action)
+      call(:sendChatAction, chat_id: chat_id, action: action)
     end
 
 

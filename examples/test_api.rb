@@ -38,6 +38,11 @@ bot.run do |client, message|
     client.send_video(chat_id: message.chat.id, video: file_id)
   when /send_location/
     client.send_location(chat_id: message.chat.id, latitude: 53.131684, longitude: 23.169556)
+  when /send_chat_action/
+    client.send_message(chat_id: message.chat.id, text: "Check my status, I am typing")
+    client.send_chat_action(chat_id: message.chat.id, action: :typing)
+    sleep 3
+    client.send_message(chat_id: message.chat.id, text: "Done")
   else
     client.send_message(chat_id: message.chat.id, text: "Unknown command")
   end

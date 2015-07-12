@@ -1,5 +1,6 @@
-require 'faraday'
 require 'virtus'
+require 'faraday'
+require 'faraday_middleware'
 
 require_relative "telebot/objects/user"
 require_relative "telebot/objects/group_chat"
@@ -11,9 +12,13 @@ require_relative "telebot/objects/document"
 require_relative "telebot/objects/sticker"
 require_relative "telebot/objects/video"
 require_relative "telebot/objects/message"
+require_relative "telebot/objects/update"
+require_relative "telebot/objects/input_file"
 
 require_relative "telebot/version"
 require_relative "telebot/client"
+require_relative "telebot/response"
+require_relative "telebot/bot"
 
 
 module Telebot
@@ -31,10 +36,10 @@ end
 # * Sticker
 # * Video
 # * Message
-
-# TODO:
 # * Update
 # * InputFile
+
+# TODO:
 # * UserProfilePhotos
 # * ReplyKeyboardMarkup
 # * ReplyKeyboardHide

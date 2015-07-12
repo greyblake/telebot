@@ -10,6 +10,7 @@ bot = Telebot::Bot.new(token)
 
 bot.run do |client, message|
   puts "#{message.from.first_name}: #{message.text}"
+  #pp message
 
   case message.text
   when /get_me/
@@ -32,6 +33,11 @@ bot.run do |client, message|
   when /send_sticker/
     file = Telebot::InputFile.new(fixture("zamenhof_sticker.webp"))
     client.send_sticker(chat_id: message.chat.id, sticker: file)
+  when /send_video/
+    file_id = "BAADAgADOQADqwcsBcskdD5ZfXZyAg"
+    client.send_video(chat_id: message.chat.id, video: file_id)
+  when /send_location/
+    client.send_location(chat_id: message.chat.id, latitude: 53.131684, longitude: 23.169556)
   else
     client.send_message(chat_id: message.chat.id, text: "Unknown command")
   end

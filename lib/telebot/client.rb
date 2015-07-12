@@ -7,10 +7,10 @@
 # * sendAudio
 # * sendDocument
 # * sendSticker
+# * sendLocation
 #
 # REMAINING:
 # * sendVideo
-# * sendLocation
 # * sendChatAction
 # * getUserProfilePhotos
 # * setWebhook
@@ -20,6 +20,7 @@ module Telebot
     API_URL = "https://api.telegram.org".freeze
 
     def initialize(token, adapter: :net_http)
+      fail(ArgumentError, "token can't be empty") if token.nil? || token.empty?
       @token = token
 
       @faraday = Faraday.new(API_URL) do |conn|
@@ -151,6 +152,37 @@ module Telebot
     # @return [Telebot::Message]
     def send_sticker(chat_id:, sticker:, reply_to_message_id: nil, reply_markup: nil)
       result = call(:sendSticker, chat_id: chat_id, sticker: sticker, reply_to_message_id: reply_to_message_id, reply_markup: reply_markup)
+      Message.new(result)
+    end
+
+    # Send video files, Telegram clients support mp4 videos (other formats may be sent as Document).
+    #
+    # @param chat_id [Integer]
+    # @param video [InputFile, String] file or file_id
+    # @param reply_to_message_id [Integer]
+    # @param reply_markup [ReplyKeyboardMarkup, ReplyKeyboardHide, ForceReply]
+    #
+    # @return [Telebot::Message]
+    def send_video(chat_id:, video:, reply_to_message_id: nil, reply_markup: nil)
+      result = call(:sendVideo, chat_id: chat_id, video: video, reply_to_message_id: reply_to_message_id, reply_markup: reply_markup)
+      Message.new(result)
+    end
+
+    # Send a point on the map.
+    #
+    # @param chat_id [Integer]
+    # @param latitude [Integer]
+    # @param longitude [Integer]
+    # @param reply_to_message_id [Integer]
+    # @param reply_markup [ReplyKeyboardMarkup, ReplyKeyboardHide, ForceReply]
+    #
+    # @return [Telebot::Message]
+    def send_location(chat_id:, latitude:, longitude:, reply_to_message_id: nil, reply_markup: nil)
+      result = call(:sendLocation, chat_id: chat_id,
+                                   latitude: latitude,
+                                   longitude: longitude,
+                                   reply_to_message_id: reply_to_message_id,
+                                   reply_markup: reply_markup)
       Message.new(result)
     end
 

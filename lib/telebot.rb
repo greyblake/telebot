@@ -14,6 +14,7 @@ require_relative "telebot/objects/video"
 require_relative "telebot/objects/message"
 require_relative "telebot/objects/update"
 require_relative "telebot/objects/input_file"
+require_relative "telebot/objects/user_profile_photos"
 
 require_relative "telebot/version"
 require_relative "telebot/client"
@@ -39,9 +40,9 @@ end
 # * Message
 # * Update
 # * InputFile
+# * UserProfilePhotos
 
 # TODO:
-# * UserProfilePhotos
 # * ReplyKeyboardMarkup
 # * ReplyKeyboardHide
 # * ForceReply

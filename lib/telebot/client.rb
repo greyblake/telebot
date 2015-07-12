@@ -3,10 +3,10 @@
 # * getUpdates
 # * sendMessage
 # * sendPhoto
-#
-# REMAINING:
 # * forwardMessage
 # * sendAudio
+#
+# REMAINING:
 # * sendDocument
 # * sendSticker
 # * sendVideo
@@ -109,13 +109,22 @@ module Telebot
     #
     # @return [Telebot::Message]
     def send_photo(chat_id:, photo:, caption: nil, reply_to_message_id: nil, reply_markup: nil)
-      result = call(:sendPhoto,
-        chat_id: chat_id,
-        photo: photo,
-        caption: caption,
-        reply_to_message_id: reply_to_message_id,
-        reply_markup: reply_markup
-      )
+      result = call(:sendPhoto, chat_id: chat_id, photo: photo, caption: caption, reply_to_message_id: reply_to_message_id, reply_markup: reply_markup)
+      Message.new(result)
+    end
+
+    # Use this method to send audio files, if you want Telegram clients to
+    # display the file as a playable voice message. For this to work, your
+    # audio must be in an .ogg file encoded with OPUS (other formats may be sent as Document)
+    #
+    # @param chat_id [Integer]
+    # @param audio [Telebot::InputFile, String] Audio file to send (file or file_id)
+    # @param reply_to_message_id [Integer] If the message is a reply, ID of the original message
+    # @param reply_markup [ReplyKeyboardMarkup, ReplyKeyboardHide, ForceReply] Additional interface options
+    #
+    # @return [Telebot::Message]
+    def send_audio(chat_id:, audio:, reply_to_message_id: nil, reply_markup: nil)
+      result = call(:sendAudio, chat_id: chat_id, audio: audio, reply_to_message_id: reply_to_message_id, reply_markup: reply_markup)
       Message.new(result)
     end
 

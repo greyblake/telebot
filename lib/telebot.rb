@@ -19,6 +19,7 @@ require_relative "telebot/version"
 require_relative "telebot/client"
 require_relative "telebot/response"
 require_relative "telebot/bot"
+require_relative "telebot/errors"
 
 
 module Telebot

@@ -1,15 +1,32 @@
+# Implemented:
+# * getUpdates
+# * sendMessage
+# * sendPhoto
+#
+# REMAINING:
+# * getMe
+# * forwardMessage
+# * sendAudio
+# * sendDocument
+# * sendSticker
+# * sendVideo
+# * sendLocation
+# * sendChatAction
+# * getUserProfilePhotos
+# * setWebhook
+
 module Telebot
   class Client
     API_URL = "https://api.telegram.org"
 
-    def initialize(token)
+    def initialize(token, adapter: :net_http)
       @token = token
 
       @faraday = Faraday.new(API_URL) do |conn|
         conn.request :multipart
         conn.request :url_encoded
         conn.response :json, :content_type => /\bjson$/
-        conn.adapter Faraday.default_adapter
+        conn.adapter adapter
       end
 
     end
@@ -61,8 +78,8 @@ module Telebot
       if response.ok
         response.result
       else
-        puts "ERROR: #{response.description}"
-        nil
+        error = Error.new(response.description, response.error_code)
+        fail(error)
       end
     end
   end

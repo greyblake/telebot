@@ -10,7 +10,9 @@ bot = Telebot::Bot.new(token)
 
 bot.run do |client, message|
   puts "#{message.from.first_name}: #{message.text}"
-  #pp message
+
+  memory = `ps -o rss -p #{$$}`.strip.split.last.to_i
+  puts "MEMORY USAGE: #{memory} Kb"
 
   case message.text
   when /get_me/
@@ -43,6 +45,16 @@ bot.run do |client, message|
     client.send_chat_action(chat_id: message.chat.id, action: :typing)
     sleep 3
     client.send_message(chat_id: message.chat.id, text: "Done")
+  when /get_user_profile_photos/
+    photos = client.get_user_profile_photos(user_id: message.from.id)
+    if photos.total_count > 0
+      client.send_message(chat_id: message.chat.id, text: "Look at yourself!")
+      photo = photos.photos.first
+      photo_size = photo.first
+      client.send_photo(chat_id: message.chat.id, photo: photo_size.file_id)
+    else
+      client.send_message(chat_id: message.chat.id, text: "Your profile has no photos")
+    end
   else
     client.send_message(chat_id: message.chat.id, text: "Unknown command")
   end

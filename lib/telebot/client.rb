@@ -10,9 +10,9 @@
 # * sendLocation
 # * sendVideo
 # * sendChatAction
+# * getUserProfilePhotos
 #
 # REMAINING:
-# * getUserProfilePhotos
 # * setWebhook
 
 module Telebot
@@ -200,6 +200,18 @@ module Telebot
     def send_chat_action(chat_id:, action:)
       fail(ArgumentError, "Unknown chat action `#{action.inspect}`") unless CHAT_ACTIONS.include?(action)
       call(:sendChatAction, chat_id: chat_id, action: action)
+    end
+
+    # Use this method to get a list of profile pictures for a user.
+    #
+    # @param user_id [Integer]
+    # @param offset [Integer]
+    # @param limit [Integer]
+    #
+    # @return [Telebot::UserProfilePhotos]
+    def get_user_profile_photos(user_id:, offset: nil, limit: nil)
+      result = call(:getUserProfilePhotos, user_id: user_id, offset: offset, limit: limit)
+      UserProfilePhotos.new(result)
     end
 
 

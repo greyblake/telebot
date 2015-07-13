@@ -1,20 +1,3 @@
-# Implemented:
-# * getMe
-# * getUpdates
-# * sendMessage
-# * sendPhoto
-# * forwardMessage
-# * sendAudio
-# * sendDocument
-# * sendSticker
-# * sendLocation
-# * sendVideo
-# * sendChatAction
-# * getUserProfilePhotos
-#
-# REMAINING:
-# * setWebhook
-
 module Telebot
   class Client
     API_URL = "https://api.telegram.org".freeze
@@ -214,6 +197,14 @@ module Telebot
       UserProfilePhotos.new(result)
     end
 
+    # Use this method to specify a url and receive incoming updates via an outgoing webhook.
+    #
+    # @param url [String] HTTPS url to send updates to. Use an empty string to remove webhook integration
+    #
+    # @return [void]
+    def set_web_hook(url:)
+      call(:setWebhook, url: url)
+    end
 
     private def call(method_name, params = {})
       path = "/bot#{@token}/#{method_name}"

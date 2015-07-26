@@ -2,7 +2,7 @@
 
 Ruby client for [Telegram's Bot API](https://core.telegram.org/bots).
 
-You can check working demo: http://telegram.me/demoTelebot
+Demo bot that demonstrates API calls: http://telegram.me/demoTelebot
 
 ## Installation
 

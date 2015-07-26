@@ -23,7 +23,22 @@ token =
 bot = Telebot::Bot.new(token)
 
 bot.run do |client, message|
+  markup = Telebot::ReplyKeyboardMarkup.new(
+    keyboard: [
+      [ "get_me", "send_message", "forward_message" ],
+      [ "send_photo", "send_audio", "send_document" ],
+      [ "send_sticker", "send_video", "send_location"],
+      [ "send_chat_action", "get_user_profile_photos"]
+    ]
+  )
+
   case message.text
+  when /start/
+    msg = "Hi! I am a demo bot that demonstrates abilities of telebot library: https://github.com/greyblake/telebot \n" \
+          "You can check my source code here: https://github.com/greyblake/telebot/blob/master/examples/demo.rb \n" \
+          "Please pick any command to try me out ;) \n"
+    client.send_message(chat_id: message.chat.id, text: msg, reply_markup: markup)
+
   when /get_me/
     user = client.get_me
     msg = "ID: #{user.id}\n"
@@ -80,14 +95,6 @@ bot.run do |client, message|
     end
 
   else
-    markup = Telebot::ReplyKeyboardMarkup.new(
-      keyboard: [
-        [ "get_me", "send_message", "forward_message" ],
-        [ "send_photo", "send_audio", "send_document" ],
-        [ "send_sticker", "send_video", "send_location"],
-        [ "send_chat_action", "get_user_profile_photos"]
-      ]
-    )
 
     client.send_message(chat_id: message.chat.id, text: 'Unknown command', reply_markup: markup)
   end

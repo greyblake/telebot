@@ -13,3 +13,4 @@
 
 # Do not public token of the demo bot
 examples/DEMO_TOKEN
+*.gem

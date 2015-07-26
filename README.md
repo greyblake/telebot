@@ -10,19 +10,19 @@ Add this line to your application's Gemfile:
 gem 'telebot'
 ```
 
-And then execute:
+Run
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install telebot
+```
+$ gem install telebot
+```
 
 ## Usage
 
 Minimal example, that repeats a message, would look like this:
 
 ```ruby
+bot = Telebot::Bot.new(TOKEN)
+
 bot.run do |client, message|
   reply = "You've said: #{message.text}"
   client.send_message(chat_id: message.chat.id, text: reply)

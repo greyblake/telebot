@@ -2,25 +2,26 @@ require 'virtus'
 require 'faraday'
 require 'faraday_middleware'
 
-require_relative "telebot/objects/user"
-require_relative "telebot/objects/group_chat"
-require_relative "telebot/objects/photo_size"
-require_relative "telebot/objects/audio"
-require_relative "telebot/objects/contact"
-require_relative "telebot/objects/location"
-require_relative "telebot/objects/document"
-require_relative "telebot/objects/sticker"
-require_relative "telebot/objects/video"
-require_relative "telebot/objects/message"
-require_relative "telebot/objects/update"
-require_relative "telebot/objects/input_file"
-require_relative "telebot/objects/user_profile_photos"
+require "telebot/objects/user"
+require "telebot/objects/group_chat"
+require "telebot/objects/photo_size"
+require "telebot/objects/audio"
+require "telebot/objects/contact"
+require "telebot/objects/location"
+require "telebot/objects/document"
+require "telebot/objects/sticker"
+require "telebot/objects/video"
+require "telebot/objects/message"
+require "telebot/objects/update"
+require "telebot/objects/input_file"
+require "telebot/objects/user_profile_photos"
+require "telebot/objects/reply_keyboard_markup"
 
-require_relative "telebot/version"
-require_relative "telebot/client"
-require_relative "telebot/response"
-require_relative "telebot/bot"
-require_relative "telebot/errors"
+require "telebot/version"
+require "telebot/client"
+require "telebot/response"
+require "telebot/bot"
+require "telebot/errors"
 
 
 module Telebot
@@ -41,8 +42,8 @@ end
 # * Update
 # * InputFile
 # * UserProfilePhotos
+# * ReplyKeyboardMarkup
 
 # TODO:
-# * ReplyKeyboardMarkup
 # * ReplyKeyboardHide
 # * ForceReply

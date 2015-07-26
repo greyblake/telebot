@@ -1,18 +1,18 @@
 module Telebot
   class Bot
-    WAIT_UPDATE_TIME = 1
+    # Default update time
+    DEFAULT_UPDATE_TIME = 2
 
-    attr_reader :client, :processed_update_ids
+    attr_reader :client, :processed_update_ids, :update_time
 
-    def initialize(token)
+    def initialize(token, update_time: DEFAULT_UPDATE_TIME)
       @client = Client.new(token)
-      @processed_update_ids = [714636938]
+      @processed_update_ids = []
+      @update_time = update_time
     end
 
     def run(&block)
-      while true
-        #puts "POLLING..."
-
+      loop do
         updates = @client.get_updates(offset: @processed_update_ids.last)
 
         updates.each do |update|
@@ -21,12 +21,11 @@ module Telebot
           @processed_update_ids << update.update_id
         end
 
-        sleep(WAIT_UPDATE_TIME)
+        sleep(@update_time)
       end
     end
 
-    def process_update(update, block)
-      #puts "Processing update #{update.update_id}"
+    private def process_update(update, block)
       block.call(client, update.message)
     end
   end

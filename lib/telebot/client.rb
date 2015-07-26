@@ -208,6 +208,12 @@ module Telebot
 
     private def call(method_name, params = {})
       path = "/bot#{@token}/#{method_name}"
+      params.reject! { |key, value| value.nil? }
+
+      if params.has_key?(:reply_markup)
+        params[:reply_markup] = params[:reply_markup].to_json
+      end
+
       faraday_response = @faraday.post(path, params)
       response = Response.new(faraday_response.body)
 

@@ -10,3 +10,6 @@
 
 # To use benefits of vim-rails plugin
 /config/environment.rb
+
+# Do not public token of the demo bot
+examples/DEMO_TOKEN

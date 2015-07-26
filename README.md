@@ -33,7 +33,6 @@ end
 
 Please check out full featured example as well: [demo.rb](https://github.com/greyblake/telebot/blob/master/examples/demo.rb).
 
-
 ### Using pure client
 
 ```ruby
@@ -53,7 +52,7 @@ client.send_message(chat_id: 12345, text: "Hello there!")
 ```
 The client supports all [Telegram's Bot API methods](https://core.telegram.org/bots/api#available-methods).
 
-For more information check out [client.rb](https://github.com/greyblake/telebot/blob/master/lib/telebot/client.rb)
+For more information check the documentation for [Telebot::Client](http://www.rubydoc.info/gems/telebot/Telebot/Client)
 and [demo.rb](https://github.com/greyblake/telebot/blob/master/examples/demo.rb).
 
 

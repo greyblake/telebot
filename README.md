@@ -1,5 +1,7 @@
 # Telebot
 
+[![Build Status](https://travis-ci.org/greyblake/telebot.png?branch=master)](https://travis-ci.org/greyblake/telebot)
+
 Ruby client for [Telegram's Bot API](https://core.telegram.org/bots).
 
 Demo bot that demonstrates API calls: http://telegram.me/demoTelebot

@@ -13,7 +13,10 @@ module Telebot
 
     def run(&block)
       loop do
-        updates = @client.get_updates(offset: @processed_update_ids.last)
+        # Note: https://core.telegram.org/bots/api#getupdates
+        # To mark an update as confirmed need to use offset+1
+        offset = @processed_update_ids.last && @processed_update_ids.last + 1
+        updates = @client.get_updates(offset: offset)
 
         updates.each do |update|
           next if @processed_update_ids.include?(update.update_id)

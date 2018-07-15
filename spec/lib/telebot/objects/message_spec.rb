@@ -51,6 +51,16 @@ describe Telebot::Message do
     expect(message.text).to eq "Saluton, amigo!"
   end
 
+  it "has attribute parse_mode (String)" do
+    message.parse_mode = "Markdown"
+    expect(message.parse_mode).to eq "Markdown"
+  end
+
+  it "has attribute parse_mode (String)" do
+    message.parse_mode = "HTML"
+    expect(message.parse_mode).to eq "HTML"
+  end
+
   it "has attribute audio (Audio)" do
     message.audio = {}
     expect(message.audio).to be_a Telebot::Audio

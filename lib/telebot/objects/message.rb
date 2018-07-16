@@ -34,6 +34,9 @@ module Telebot
     # Optional. For text messages, the actual UTF-8 text of the message
     attribute :text, String
 
+    # Optional. For text messages, parse_mode: "Markdown" or "HTML"
+    attribute :parse_mode, String
+
     # Optional. Message is an audio file, information about the file
     attribute :audio, Audio
 

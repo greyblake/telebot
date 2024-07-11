@@ -1,6 +1,5 @@
 require 'virtus'
 require 'faraday'
-require 'faraday_middleware'
 
 require "telebot/objects/user"
 require "telebot/objects/group_chat"
